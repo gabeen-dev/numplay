@@ -30,66 +30,68 @@ public class BaseballGame {
 
         while (true) {
 
-            //게임 초기화
-            strikeCnt = 0;
-            ballCnt = 0;
-            outCnt = 0;
-            numbers.clear();
+            try {
 
-            System.out.println("숫자를 입력하세요");
-            String input = scanner.nextLine();
+                //게임 초기화
+                strikeCnt = 0;
+                ballCnt = 0;
+                outCnt = 0;
+                numbers.clear();
 
-            // TODO : 인터페이스 List학습
+                System.out.println("숫자를 입력하세요");
+                String input = scanner.nextLine();
 
+                // TODO : 인터페이스 List학습
+                for (char ch : input.toCharArray()) {
 
-            for (char ch : input.toCharArray()) {
+                    // 문자 예외 처리
+                    // isDigit : 숫자인지 체크하는 메서트 /클래스 Character의 메서드 중 하나
+                    if (!isDigit(ch)) {
+                        // throw : 예외를 던지다/ 에외 처리 학습
+                        // 예외처리 이후 게임 재시작 할 수 없음
+                        throw new RuntimeException("숫자만 입력 가능");
+                    } else if (isDigit(ch) && ch =='0') {
+                        throw new RuntimeException("0은 입력 불가 입니다.");
+                    }
 
-                // 문자 예외 처리
-                // isDigit : 숫자인지 체크하는 메서트 /클래스 Character의 메서드 중 하나
-                if (!isDigit(ch)) {
-                    // throw : 예외를 던지다/ 에외 처리 학습
-                    throw new RuntimeException("숫자만 입력 가능");
+                    //????
+                    numbers.add(getNumericValue(ch));
                 }
 
-                
-
-                numbers.add(getNumericValue(ch));
-            }
-
-            // ball 체크 ChatGPT가져옴
-            for (int i = 0; i < numbers.size(); i++) {
-                if (answers.contains(numbers.get(i)) && !answers.get(i).equals(numbers.get(i))) {
-                    ballCnt++;
+                // ball 체크 ChatGPT가져옴
+                for (int i = 0; i < numbers.size(); i++) {
+                    if (answers.contains(numbers.get(i)) && !answers.get(i).equals(numbers.get(i))) {
+                        ballCnt++;
+                    }
                 }
-            }
 
-            // streik 체크 ChatGPT가져옴
-            for (int i = 0; i < answers.size(); i++) {
-                if (answers.get(i).equals(numbers.get(i))) {
-                    strikeCnt++;
+                // streik 체크 ChatGPT가져옴
+                for (int i = 0; i < answers.size(); i++) {
+                    if (answers.get(i).equals(numbers.get(i))) {
+                        strikeCnt++;
+                    }
                 }
-            }
 
-            // out 체크 ChatGPT가져옴
-            for (int i = 0; i < numbers.size(); i++) {
-                if (!answers.contains(numbers.get(i))) {
-                    outCnt++;
+                // out 체크 ChatGPT가져옴
+                for (int i = 0; i < numbers.size(); i++) {
+                    if (!answers.contains(numbers.get(i))) {
+                        outCnt++;
+                    }
                 }
+
+                // 정답 체크
+                if (strikeCnt == answers.size()) {
+                    System.out.println("정답입니다.");
+                    break;
+                } else {
+                    System.out.println("strike : " + strikeCnt + ", ball : " + ballCnt + ", out : " + outCnt);
+                }
+
+            } catch (RuntimeException e){
+                System.out.println(e.getMessage());
             }
 
-            // 정답 체크
-            if (strikeCnt == answers.size()) {
-                System.out.println("정답입니다.");
-                break;
-            } else {
-                System.out.println("strike : " + strikeCnt + ", ball : " + ballCnt + ", out : " + outCnt);
-            }
-
-
-
-// 중복 값, 0 예외 처리
-
-
+            // 중복 값, 0 예외 처리
 
         }
 
