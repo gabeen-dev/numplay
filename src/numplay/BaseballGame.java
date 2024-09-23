@@ -22,9 +22,7 @@ public class BaseballGame {
         answers.add(2);
         answers.add(3);
 
-        int strikeCnt = 0;
-        int ballCnt = 0;
-        int outCnt = 0;
+        int strikeCnt, ballCnt, outCnt;
 
         while (true) {
 
