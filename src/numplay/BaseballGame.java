@@ -54,6 +54,11 @@ public class BaseballGame {
                     if (numbers.contains(number)) {
                         throw new RuntimeException("중복된 숫자가 있습니다: " + number);
                     }
+
+                    //숫자 자릿수 예외 처리
+                    if (input.length() != 3) {
+                        throw new RuntimeException("세 자리 숫자를 입력해 주세요.");
+                    }
                     numbers.add(number);
                 }
 
