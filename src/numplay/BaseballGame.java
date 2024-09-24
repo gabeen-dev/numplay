@@ -12,20 +12,20 @@ public class BaseballGame {
 
         // TODO : 램덤값 생성
 
-        //제네릭(<>)에선 무조건 클래스타임을 써야한다
-        List<Integer> answers = new ArrayList<>();
+        //ball, out, strike 인스턴스 생성
+        Checkballcnt checkballcnt = new Checkballcnt();
+        Checkstrikecnt checkstrikecnt = new Checkstrikecnt();
+        Checkoutcnt checkoutcnt = new Checkoutcnt();
+        RendomNum rendomNum = new RendomNum();
 
+        //제네릭(<>)에선 무조건 클래스타임을 써야한다
+        List<Integer> answers = rendomNum.create();
         //사용자에게 받을 값
         List<Integer> numbers = new ArrayList<>();
-
-        answers.add(4);
-        answers.add(2);
-        answers.add(3);
 
         int strikeCnt, ballCnt, outCnt;
 
         while (true) {
-
             try {
                 //게임 초기화
                 strikeCnt = 0;
@@ -62,26 +62,12 @@ public class BaseballGame {
                     numbers.add(number);
                 }
 
-                // ball 체크 ChatGPT가져옴
-                for (int i = 0; i < numbers.size(); i++) {
-                    if (answers.contains(numbers.get(i)) && !answers.get(i).equals(numbers.get(i))) {
-                        ballCnt++;
-                    }
-                }
-
-                // streik 체크 ChatGPT가져옴
-                for (int i = 0; i < answers.size(); i++) {
-                    if (answers.get(i).equals(numbers.get(i))) {
-                        strikeCnt++;
-                    }
-                }
-
-                // out 체크 ChatGPT가져옴
-                for (int i = 0; i < numbers.size(); i++) {
-                    if (!answers.contains(numbers.get(i))) {
-                        outCnt++;
-                    }
-                }
+                // ball 체크
+                checkballcnt.chekballcnt(ballCnt, numbers, answers);
+                // strike 체크
+                checkstrikecnt.checkstrikecnt(strikeCnt, numbers, answers);
+                // out 체크
+                checkoutcnt.checkoutcnt(outCnt, numbers, answers);
 
                 // 정답 체크
                 if (strikeCnt == answers.size()) {
