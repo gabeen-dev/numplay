@@ -10,8 +10,6 @@ public class BaseballGame {
         System.out.println("< 게임을 시작합니다 >");
         Scanner scanner = new Scanner(System.in);
 
-        // TODO : 램덤값 생성
-
         //ball, out, strike 인스턴스 생성
         Checkballcnt checkballcnt = new Checkballcnt();
         Checkstrikecnt checkstrikecnt = new Checkstrikecnt();
@@ -62,12 +60,12 @@ public class BaseballGame {
                     numbers.add(number);
                 }
 
-                // ball 체크
-                checkballcnt.chekballcnt(ballCnt, numbers, answers);
-                // strike 체크
-                checkstrikecnt.checkstrikecnt(strikeCnt, numbers, answers);
-                // out 체크
-                checkoutcnt.checkoutcnt(outCnt, numbers, answers);
+                // ball 체크(리턴 값을 받아서 할당)
+                ballCnt = checkballcnt.chekballcnt(ballCnt, numbers, answers);
+                // strike 체크(리턴 값을 받아서 할당)
+                strikeCnt = checkstrikecnt.checkstrikecnt(strikeCnt, numbers, answers);
+                // out 체크(리턴 값을 받아서 할당)
+                outCnt = checkoutcnt.checkoutcnt(outCnt, numbers, answers);
 
                 // 정답 체크
                 if (strikeCnt == answers.size()) {
