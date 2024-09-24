@@ -31,40 +31,32 @@ public class BaseballGame {
                     numbers.clear();
 
                     System.out.println("숫자를 입력하세요");
-                    String input = scanner.nextLine();
+                    String input = scanner.nextLine();// 사용자아게 값을 받음
 
-                    // TODO : 인터페이스 List학습
                     for (char ch : input.toCharArray()) {
 
                         // 문자 예외 처리
-                        // isDigit : 숫자인지 체크하는 메서트 /클래스 Character의 메서드 중 하나
-                        if (!isDigit(ch)) {
-                            // throw : 예외를 던지다/ 에외 처리 학습
-                            // 예외처리 이후 게임 재시작 할 수 없음 -> try catch 사용
+                        if (!isDigit(ch)) {  // isDigit : 숫자인지 체크하는 메서트 /클래스 Character의 메서드 중 하나
                             throw new RuntimeException("숫자만 입력 해 주세요");
-                        } else if (ch == '0') {
+
+                        } else if (ch == '0') {// 0 에외 처리
                             throw new RuntimeException("1~9까지 숫자를 사용해 주세요");
                         }
 
-                        // 숫자 중복 처리
-                        int number = getNumericValue(ch);
+                        int number = getNumericValue(ch);// 숫자 중복 처리
                         if (numbers.contains(number)) {
                             throw new RuntimeException("중복된 숫자가 있습니다: " + number);
                         }
 
-                        //숫자 자릿수 예외 처리
-                        if (input.length() != 3) {
+                        if (input.length() != 3) { //숫자 자릿수 예외 처리
                             throw new RuntimeException("세 자리 숫자를 입력해 주세요.");
                         }
                         numbers.add(number);
                     }
 
-                    // ball 체크(리턴 값을 받아서 할당)
-                    ballCnt = checkballcnt.chekballcnt(ballCnt, numbers, answers);
-                    // strike 체크(리턴 값을 받아서 할당)
-                    strikeCnt = checkstrikecnt.checkstrikecnt(strikeCnt, numbers, answers);
-                    // out 체크(리턴 값을 받아서 할당)
-                    outCnt = checkoutcnt.checkoutcnt(outCnt, numbers, answers);
+                    ballCnt = checkballcnt.chekballcnt(ballCnt, numbers, answers);// ball 체크(리턴 값을 받아서 할당)
+                    strikeCnt = checkstrikecnt.checkstrikecnt(strikeCnt, numbers, answers);// strike 체크(리턴 값을 받아서 할당)
+                    outCnt = checkoutcnt.checkoutcnt(outCnt, numbers, answers);// out 체크(리턴 값을 받아서 할당)
 
                     // 정답 체크
                     if (strikeCnt == answers.size()) {
